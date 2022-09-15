@@ -6,12 +6,11 @@ const NavBar = ({setUrl}) => {
     useEffect(() => {
         const delayDebounceFn = setTimeout(() => {
             console.log(searchTerm.trim());
-            // !Todo: API call
-            // setUrl()
+            setUrl(`http://localhost:5000/comments/searchTerm?searchTerm=${searchTerm}`)
         }, 1000);
 
         return () => clearTimeout(delayDebounceFn);
-    }, [searchTerm]);
+    }, [searchTerm, setUrl]);
 
     return (
         <nav className="bg-gray-200 py-2 flex items-center justify-between px-2">

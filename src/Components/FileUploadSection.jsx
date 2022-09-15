@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import Button from "./Button";
 import ErrorMessage from "./ErrorMessage";
@@ -30,6 +30,8 @@ const FileUploadSection = ({ setIsFileUploaded }) => {
                 const result = await response.json();
                 if (response.status === 201) {
                     setIsFileUploaded((prev) => !prev);
+
+                    //emitting a success toast
                     toast("File is uploaded successfully!", {
                         position: "bottom-left",
                         autoClose: 2000,
@@ -39,6 +41,7 @@ const FileUploadSection = ({ setIsFileUploaded }) => {
                         draggable: true,
                         progress: undefined,
                     });
+                    
                 }
             } catch (error) {
                 console.log(error);
@@ -55,7 +58,7 @@ const FileUploadSection = ({ setIsFileUploaded }) => {
                 onSubmit={handleFileUpload}
                 className="border-r-2 border-slate-200 px-4"
             >
-                <FileInput onChange={onFileChange} />
+                <FileInput onChange={onFileChange}/>
                 <ErrorMessage
                     className={`${
                         error.fileError || error.uploadError

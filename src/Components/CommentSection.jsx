@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import CommentCard from "./CommentCard";
 import ErrorMessage from "./ErrorMessage";
 import Loading from "./Loading";
