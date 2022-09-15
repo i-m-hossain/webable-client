@@ -2,14 +2,17 @@ import React, { useEffect, useState } from "react";
 import Input from "./Input";
 
 const NavBar = ({setUrl}) => {
+    const [pageMounted, setPageMounted]= useState(true)
     const [searchTerm, setSearchTerm] = useState("");
     useEffect(() => {
-        const delayDebounceFn = setTimeout(() => {
-            console.log(searchTerm.trim());
-            setUrl(`http://localhost:5000/comments/searchTerm?searchTerm=${searchTerm}`)
-        }, 1000);
-
-        return () => clearTimeout(delayDebounceFn);
+        if(!pageMounted){ //we don't want search functionality at first when page mounts
+            const delayDebounceFn = setTimeout(() => {
+                console.log(searchTerm.trim());
+                setUrl(`http://localhost:5000/comments/searchTerm?searchTerm=${searchTerm}`)
+            }, 1000);
+            return () => clearTimeout(delayDebounceFn);
+        }
+        setPageMounted(false)
     }, [searchTerm, setUrl]);
 
     return (
