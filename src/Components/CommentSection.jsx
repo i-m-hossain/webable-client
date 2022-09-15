@@ -3,8 +3,7 @@ import CommentCard from "./CommentCard";
 import ErrorMessage from "./ErrorMessage";
 import Loading from "./Loading";
 
-const CommentSection = ({comments, loading, error}) => {
-    
+const CommentSection = ({ comments, loading, error }) => {
     if (loading) {
         return <Loading />;
     }
@@ -12,8 +11,12 @@ const CommentSection = ({comments, loading, error}) => {
         <div className="w-3/4 flex flex-wrap">
             {error ? (
                 <ErrorMessage>Comment could not be found!</ErrorMessage>
+            ) : comments.length > 0 ? (
+                comments?.map((comment) => (
+                    <CommentCard comment={comment} key={comment.id} />
+                ))
             ) : (
-                comments.map((comment) => <CommentCard comment={comment} />)
+                <h4 className="text-red-500  mx-auto">No comments found</h4>
             )}
         </div>
     );

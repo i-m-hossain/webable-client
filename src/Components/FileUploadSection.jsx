@@ -1,9 +1,10 @@
 import React, { useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
 import Button from "./Button";
 import ErrorMessage from "./ErrorMessage";
 import FileInput from "./FileInput";
 
-const FileUploadSection = () => {
+const FileUploadSection = ({ setIsFileUploaded }) => {
     const [selectedFile, setSelectedFile] = useState(null);
     const [error, setError] = useState({
         fileError: false,
@@ -12,18 +13,41 @@ const FileUploadSection = () => {
     const onFileChange = (event) => {
         setSelectedFile(event.target.files[0]);
     };
-    const handleFileUpload = (e) => {
+    const handleFileUpload = async (e) => {
         e.preventDefault();
         if (selectedFile.type === "application/json") {
             setError((prev) => ({ ...prev, fileError: false }));
             const formData = new FormData();
             formData.append("file", selectedFile);
+            try {
+                const response = await fetch(
+                    "http://localhost:5000/file/upload",
+                    {
+                        method: "POST",
+                        body: formData,
+                    }
+                );
+                const result = await response.json();
+                if (response.status === 201) {
+                    setIsFileUploaded((prev) => !prev);
+                    toast("File is uploaded successfully!", {
+                        position: "bottom-left",
+                        autoClose: 2000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                    });
+                }
+            } catch (error) {
+                console.log(error);
+                setError((prev) => ({ ...prev, uploadError: true }));
+            }
             console.log({ selectedFile });
         } else {
             setError((prev) => ({ ...prev, fileError: true }));
         }
-
-        // ! todo: api call
     };
     return (
         <div className="w-1/4">
@@ -44,6 +68,17 @@ const FileUploadSection = () => {
                 </ErrorMessage>
                 <Button type="submit">Upload File</Button>
             </form>
+            <ToastContainer
+                position="bottom-left"
+                autoClose={2000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+            />
         </div>
     );
 };

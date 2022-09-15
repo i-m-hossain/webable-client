@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 
-const useComments = (url) => {
-    const [comments, setComments] = useState([]);
-    const [loading, setLoading] = useState(false);
+const useComments = (url, isFileUploaded) => {
+    const [comments, setComments] = useState([]);//all comments
+    const [loading, setLoading] = useState(false); 
     const [error, setError] = useState(false);
     useEffect(() => {
         const fetchComments = async () => {
@@ -19,7 +19,7 @@ const useComments = (url) => {
             }
         };
         fetchComments();
-    }, [url]);
+    }, [isFileUploaded, url]);
     return [comments, loading, error];
 };
 

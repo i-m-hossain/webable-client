@@ -5,7 +5,7 @@ const NavBar = ({setUrl}) => {
     const [searchTerm, setSearchTerm] = useState("");
     useEffect(() => {
         const delayDebounceFn = setTimeout(() => {
-            console.log(searchTerm);
+            console.log(searchTerm.trim());
             // !Todo: API call
             // setUrl()
         }, 1000);
@@ -16,7 +16,7 @@ const NavBar = ({setUrl}) => {
     return (
         <nav className="bg-gray-200 py-2 flex items-center justify-between px-2">
             <h4 className="text-red-400 font-bold">Webable</h4>
-            <ul className="flex space-x-4">
+            <ul className="w-1/4">
                 <li className="list-none">
                     <Input
                         placeholder="Search comment"
@@ -27,7 +27,7 @@ const NavBar = ({setUrl}) => {
                     />
                 </li>
             </ul>
-        </nav>
+        </nav>  
     );
 };
 
