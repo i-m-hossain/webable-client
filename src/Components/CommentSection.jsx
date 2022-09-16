@@ -8,7 +8,7 @@ const CommentSection = ({ comments, loading, error }) => {
         return <Loading />;
     }
     return (
-        <div className="w-3/4 flex flex-wrap">
+        <div className="md:w-3/4 grid grid-cols-1 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 gap-2 px-4">
             {error ? (
                 <ErrorMessage>Comment could not be found!</ErrorMessage>
             ) : comments.length > 0 ? (

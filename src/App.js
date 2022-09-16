@@ -1,5 +1,5 @@
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import CommentSection from "./Components/CommentSection";
 import FileUploadSection from "./Components/FileUploadSection";
 import NavBar from "./Components/NavBar";
@@ -10,12 +10,12 @@ export default function App() {
     const [url, setUrl] = useState("http://localhost:5000/comments")
     const [comments, loading, error] = useComments(url, isFileUploaded)
     return (
-        <main className="h-[100vh] bg-gray-100">
+        <>
             <NavBar setUrl={setUrl} />
-            <section className="flex justify-center space-x-4 my-6">
+            <section className="md:flex justify-center md:space-x-4 my-6">
                 <FileUploadSection setIsFileUploaded={setIsFileUploaded}/>
                 <CommentSection comments={comments} loading={loading} error={error}/>
             </section>
-        </main>
+        </>
     );
 }

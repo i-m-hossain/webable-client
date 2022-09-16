@@ -41,7 +41,6 @@ const FileUploadSection = ({ setIsFileUploaded }) => {
                         draggable: true,
                         progress: undefined,
                     });
-                    
                 }
             } catch (error) {
                 console.log(error);
@@ -53,12 +52,11 @@ const FileUploadSection = ({ setIsFileUploaded }) => {
         }
     };
     return (
-        <div className="w-1/4">
-            <form
-                onSubmit={handleFileUpload}
-                className="border-r-2 border-slate-200 px-4"
-            >
-                <FileInput onChange={onFileChange}/>
+        <div className="md:w-1/4  border-slate-200  mb-4">
+            <form onSubmit={handleFileUpload} className="md:border-r-2 px-4">
+                <FileInput onChange={onFileChange} />
+
+                <Button type="submit">Upload File</Button>
                 <ErrorMessage
                     className={`${
                         error.fileError || error.uploadError
@@ -69,7 +67,6 @@ const FileUploadSection = ({ setIsFileUploaded }) => {
                     {error.fileError && "Please upload a json file"}
                     {error.uploadError && "couldn't upload file"}
                 </ErrorMessage>
-                <Button type="submit">Upload File</Button>
             </form>
             <ToastContainer
                 position="bottom-left"

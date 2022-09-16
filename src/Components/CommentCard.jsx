@@ -1,16 +1,19 @@
 import React from "react";
-
+import avatar from './../img/user.png'
 const CommentCard = ({comment}) => {
     return (
-        <div className="p-6 w-1/3 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
-            <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                {comment?.user.username}
-            </h5>
+            <div className="bg-gray-200 border border-gray-300 dark:bg-gray-800 text-black dark:text-gray-200 p-2 rounded-md flex">
+                <img className="rounded-full h-8 w-8 mr-2 mt-1 " src={avatar} alt="avatar"/>
+                <div>
+                    <div className="bg-gray-100 dark:bg-gray-700 rounded-3xl px-4 pt-2 pb-2.5">
+                        <div className="font-semibold text-sm leading-relaxed">{comment?.user.username}</div>
+                        <div className="text-normal leading-snug md:leading-normal">
+                            {comment?.body}
+                        </div>
+                    </div>
 
-            <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
-                {comment?.body}
-            </p>
-        </div>
+                </div>
+            </div>
     );
 };
 
