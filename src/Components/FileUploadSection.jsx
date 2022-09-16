@@ -30,9 +30,21 @@ const FileUploadSection = ({ setIsFileUploaded }) => {
                 const result = await response.json();
                 if (response.status === 201) {
                     setIsFileUploaded((prev) => !prev);
-
+                    setError((prev) => ({ ...prev, uploadError: false }));
                     //emitting a success toast
                     toast("File is uploaded successfully!", {
+                        position: "bottom-left",
+                        autoClose: 2000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                    });
+                }
+                if(response.status===200){
+                    setError((prev) => ({ ...prev, uploadError: false }));
+                    toast("All files are duplicate!", {
                         position: "bottom-left",
                         autoClose: 2000,
                         hideProgressBar: false,
