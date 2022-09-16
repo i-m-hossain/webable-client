@@ -7,7 +7,11 @@ const NavBar = ({setUrl}) => {
     useEffect(() => {
         if(!pageMounted){ //we don't want search functionality at first when page mounts
             const delayDebounceFn = setTimeout(() => {
-                setUrl(`http://localhost:5000/comments/searchTerm?searchTerm=${searchTerm.trim()}`)
+                if(searchTerm===""){//when search term is nothing we will fetch all comments
+                    setUrl("http://localhost:5000/comments")
+                }else{
+                    setUrl(`http://localhost:5000/comments/searchTerm?searchTerm=${searchTerm.trim()}`)
+                }
             }, 1000);
             return () => clearTimeout(delayDebounceFn);
         }
