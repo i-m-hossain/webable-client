@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Input from "./Input";
 
-const NavBar = ({setUrl}) => {
+const NavBar = ({setUrl,setSearching}) => {
     const [pageMounted, setPageMounted]= useState(true)
     const [searchTerm, setSearchTerm] = useState("");
     useEffect(() => {
@@ -9,8 +9,10 @@ const NavBar = ({setUrl}) => {
             const delayDebounceFn = setTimeout(() => {
                 if(searchTerm===""){//when search term is nothing we will fetch all comments
                     setUrl("http://localhost:5000/comments")
+                    setSearching(false)
                 }else{
                     setUrl(`http://localhost:5000/comments/searchTerm?searchTerm=${searchTerm.trim()}`)
+                    setSearching(true)
                 }
             }, 1000);
             return () => clearTimeout(delayDebounceFn);

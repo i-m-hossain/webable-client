@@ -280,6 +280,15 @@
                 "id": 36,
                 "username": "dalmondz"
             }
+        },
+        {
+            "id": 32,
+            "body": "a new data",
+            "postId": 23,
+            "user": {
+                "id": 36,
+                "username": "imran"
+            }
         }
     ]
 }
